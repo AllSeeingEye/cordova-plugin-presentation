@@ -303,6 +303,38 @@
     }
 }
 
+- (void)setSecondScreen:(CDVInvokedUrlCommand*)command
+{    
+    CDVPluginResult* pluginResult = nil;
+    NSString* cmd = [command.arguments objectAtIndex:0];    
+
+    if ([cmd isEqualToString:@"activate"])
+    {
+        for (WebscreenViewController *wvc in self.screens)
+        {
+            [wvc.window setHidden:YES];
+        }
+
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    }
+    else if([cmd isEqualToString:@"deactivate"])
+    {      
+        for (WebscreenViewController *wvc in self.screens)
+        {
+            [wvc.window setHidden:NO];
+        }
+
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    }
+    else
+    {
+        NSLog(@"Errore command value");
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void) webscreenReady:(NSString *)sid
 {
     NSLog(@"Called webscreenReady");
