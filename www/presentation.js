@@ -91,7 +91,7 @@ Object.defineProperty(NavigatorPresentation.prototype, "showSecondScreen",
     {
         exec(/*successCallback*/Function, /*errorCallback*/Function, "Presentation", "setSecondScreen", [ doShow ? "activate" : "deactivate" ]);
     }
-}
+});
 
 Object.defineProperty(NavigatorPresentation.prototype, "requestSession",
 {
